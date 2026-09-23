@@ -298,14 +298,13 @@ function init() {
 	sketchCanvas = document.getElementById('sketch');
 	paper.setup(sketchCanvas);
 	sketch = new Sketch();
-	// shadow = new Shadow();
-	pencil.init(pencilCanvasW, pencilCanvasH, onReady);
-	
+	shadow = new Shadow();
+
 	onResize();
-	
-  // Some intro animation (the sketchpad expands once everything is loaded)
+
+  // Intro animation (sketchpad-i zgjerohet sapo gjithçka ngarkohet)
 	introTl = new TimelineLite({paused: true, delay: 2, onComplete: function() {
-    // Allow the user to interact with the mouse only after the intro animation has finished
+    // Lejo ndërveprimin me miun vetëm pasi animimi intro të ketë përfunduar
 		window.addEventListener('mousedown', onMouseDown);
 		window.addEventListener('mouseup', onMouseUp);
 		window.addEventListener('mousemove', onMove);
@@ -314,7 +313,9 @@ function init() {
   introTl.to('#intro', 0.3, {opacity: 0});
 	introTl.from('#sketchpad', 0.5, {scaleY: 0, ease: Expo.easeInOut});
 	introTl.append(TweenMax.fromTo(pencilPos, 0.7, {x: wW / 2, y: wH + 300}, {x: wW * 0.7, y: wH * 0.5, roundProps: 'x,y', ease: Expo.easeOut}));
-	
+
+	pencil.init(pencilCanvasW, pencilCanvasH, onReady);
+
 	render();
 }
 
